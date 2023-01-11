@@ -35,8 +35,21 @@ namespace RankingAppTut.Controllers
         [HttpGet("{itemType:int}")]
         public ItemModel[] Get(int itemType)
         {
-            ItemModel[] items = Items.Where(i => i.ItemType == itemType).ToArray();
+            ItemModel[] items;
+            if (itemType == 2)
+            {
+                 items = Items.Where(i => i.ItemType == itemType).ToArray();
+            }
+            else
+            {
+
+                items = Items.Where(i => i.ItemType == itemType).OrderByDescending(i => i.Title).ToArray();
+            }
+            System.Threading.Thread.Sleep(2000);
             return items;
+
         }
+
+
     }
 }
